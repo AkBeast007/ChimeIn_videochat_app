@@ -5,11 +5,32 @@ body {
     background-color: #f1f1f1; /* Change the background color of the page */
 }
 
+.page-header {
+    background-color: #4CAF50; /* Matching the button color */
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.page-header h1 {
+    margin: 0;
+    font-size: 2.5em; /* Adjust font size as needed */
+    font-family: 'Arial', sans-serif; /* Customize font family if desired */
+}
+
+.disclaimer {
+    margin-top: 40px;
+    font-size: 1em;
+    color: #ff8080; /* Adjust color as needed */
+    text-align: center;
+}
+
 .container {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    height: calc(100vh - 100px); /* Adjust to account for header height */
 }
 
 .login-form,

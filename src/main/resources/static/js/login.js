@@ -18,7 +18,7 @@ function handleLogin(event) {
         body: JSON.stringify(user)
     }).then(response => {
         if (!response.ok) {
-            alert('Login and / or password is incorrect');
+            alert('Email or password is incorrect');
         }
         return response.json();
     }).then((response) => {

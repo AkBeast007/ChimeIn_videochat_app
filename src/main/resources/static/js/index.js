@@ -1,17 +1,22 @@
 function loadAndDisplayUsers() {
 
-    // check if the user is connected
-    const connectedUser = localStorage.getItem('connectedUser');
+    // Check if the user is connected
+    const connectedUser = JSON.parse(localStorage.getItem('connectedUser'));
     if (!connectedUser) {
         window.location = 'login.html';
         return;
     }
 
+    // Display the logged-in user's name
+    const loggedInUserNameElement = document.getElementById('loggedInUserName');
+    if (loggedInUserNameElement && connectedUser.username) {
+        loggedInUserNameElement.textContent = connectedUser.username;
+    }
 
     const userListElement = document.getElementById("userList");
     // Clear any existing content in the userListElement
     userListElement.innerHTML = "Loading...";
-    // Retrieve the userList from Local Storage
+    // Retrieve the user list from the server
     fetch('http://localhost:8080/api/v1/users')
         .then((response) => {
             return response.json();
@@ -42,7 +47,6 @@ function displayUsers(userList, userListElement) {
 // Call the loadAndDisplayUsers function when the page loads
 window.addEventListener("load", loadAndDisplayUsers);
 
-
 // Function to handle Logout
 function handleLogout() {
     fetch('http://localhost:8080/api/v1/users/logout', {
@@ -50,7 +54,7 @@ function handleLogout() {
         headers: {
             'Content-Type': 'application/json'
         },
-        body: localStorage.getItem('connectedUser')
+        body: JSON.stringify({ username: JSON.parse(localStorage.getItem('connectedUser')).username })
     })
         .then((response) => {
             return response;
@@ -63,7 +67,6 @@ function handleLogout() {
 
 const logoutBtn = document.getElementById("logoutBtn");
 logoutBtn.addEventListener("click", handleLogout);
-
 
 // Function to handle Meeting room
 function handleNewMeetingRedirect() {

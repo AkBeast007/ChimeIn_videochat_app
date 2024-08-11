@@ -11,35 +11,29 @@ import org.springframework.context.annotation.Bean;
 public class VideochatApplication {
 
 	public static void main(String[] args) {
-
 		SpringApplication.run(VideochatApplication.class, args);
 	}
-
-	@Bean
-	public CommandLineRunner commandLineRunner(
-			UserService service
-	)
-	{
-		return args -> {
-			service.register(User.builder()
-					.username("John")
-					.email("john@gmail.com")
-					.password("123")
-					.build());
-
-			service.register(User.builder()
-					.username("Doe")
-					.email("doe@gmail.com")
-					.password("345")
-					.build());
-
-			service.register(User.builder()
-					.username("Anny")
-					.email("anny@gmail.com")
-					.password("789")
-					.build());
-		};
-	}
-
-
+//
+//	@Bean
+//	public CommandLineRunner commandLineRunner(UserService service) {
+//		return args -> {
+//			service.register(User.builder()
+//					.username("John")
+//					.email("john@gmail.com")
+//					.password("123")
+//					.build());
+//
+//			service.register(User.builder()
+//					.username("Doe")
+//					.email("doe@gmail.com")
+//					.password("345")
+//					.build());
+//
+//			service.register(User.builder()
+//					.username("Anny")
+//					.email("anny@gmail.com")
+//					.password("789")
+//					.build());
+//		};
+//	}
 }
