@@ -10,26 +10,34 @@ function handleLogin(event) {
         password: password
     };
 
-    fetch('http://localhost:8080/api/v1/users/login', {
+    fetch('https://chimein-videochat-app.onrender.com/api/v1/users/login', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(user)
-    }).then(response => {
+    })
+    .then(response => {
         if (!response.ok) {
-            alert('Email or password is incorrect');
+            // Check for specific error status
+            if (response.status === 401) {
+                alert('Email or password is incorrect');
+            } else {
+                alert('An error occurred: ' + response.statusText);
+            }
+            throw new Error('Network response was not ok');
         }
         return response.json();
-    }).then((response) => {
+    })
+    .then(response => {
         localStorage.setItem('connectedUser', JSON.stringify(response));
-        window.location.href = 'index.html'
-    }).catch(error => {
+        window.location.href = 'index.html';
+    })
+    .catch(error => {
         console.error('POST request error', error);
+        alert('An unexpected error occurred. Please try again later.');
     });
 }
-
-
 
 const loginForm = document.getElementById("loginForm");
 loginForm.addEventListener("submit", handleLogin);
